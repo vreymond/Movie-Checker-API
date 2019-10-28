@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const directorSchema = new Schema({
+const personSchema = {
   firstname: {
     type: String,
     required: true,
@@ -10,20 +10,21 @@ const directorSchema = new Schema({
     type: String,
     required: true
   },
-  
-});
+  nationality: {
+    type: String,
+    required: true
+  },
+  movies: {
+    type: [Schema.Types.ObjectId],
+    ref: 'Movie',
+    required: true
+  }
+}
 
-const producerSchema = new Schema({
-
-});
-
-const scenaristSchema = new Schema({
-
-});
-
-const musicSchema = new Schema({
-
-});
+const directorSchema = new Schema(personSchema);
+const producerSchema = new Schema(personSchema);
+const scenaristSchema = new Schema(personSchema);
+const musicSchema = new Schema(personSchema);
 
 module.exports = {
   Director: mongoose.model('Director', directorSchema),
